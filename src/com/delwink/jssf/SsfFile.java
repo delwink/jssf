@@ -17,49 +17,46 @@
 
 package com.delwink.jssf;
 
+import java.util.ArrayList;
+
 /**
  * A Side Scroller Format file.
  * @author David McMackins II Brandon Wadkins
  */
 public class SsfFile {
+    private ArrayList<Background> backgrounds;
+    private ArrayList<Platform> platforms;
+    private Player player;
     
-    public Player getPlayer(){
-        
-        
-        return null;
-        
-        
-    }
-    public Player setPlayer(){
-        
-        
-        return null;
+    public Player getPlayer() {
+        return player;
     }
     
-    public Platform getPlatform(){
-        
-        
-        return null;        
-    }
-    public Platform addPlatform(){
-        
-        
-        return null;
-    }
-    public Platform removePlatform(){
-        
-        
-        return null;
+    public void setPlayer(Player player) {
+        this.player = player;
     }
     
-    public Background addBackground(){
-        
-        
-        return null;
+    public Platform[] getPlatforms() {
+        return this.platforms.toArray(new Platform[this.platforms.size()]);
     }
-    public Background removeBackground(){
-        
-        
-        return null;
+    
+    public void addPlatform(Platform platform) {
+        this.platforms.add(platform);
+    }
+    
+    public void removePlatform(Platform platform) {
+        this.platforms.remove(platform);
+    }
+    
+    public Background[] getBackgrounds() {
+        return this.backgrounds.toArray(new Background[this.backgrounds.size()]);
+    }
+    
+    public void addBackground(Background background) {
+        this.backgrounds.add(background);
+    }
+    
+    public void removeBackground(Background background) {
+        this.backgrounds.remove(background);
     }
 }
