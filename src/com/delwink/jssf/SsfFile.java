@@ -21,7 +21,7 @@ import java.util.ArrayList;
 
 /**
  * A Side Scroller Format file.
- * @author David McMackins II Brandon Wadkins
+ * @authors David McMackins II, Brandon Wadkins
  */
 public class SsfFile {
     private ArrayList<Background> backgrounds;
