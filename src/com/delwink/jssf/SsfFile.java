@@ -19,8 +19,47 @@ package com.delwink.jssf;
 
 /**
  * A Side Scroller Format file.
- * @author David McMackins II
+ * @author David McMackins II Brandon Wadkins
  */
 public class SsfFile {
     
+    public Player getPlayer(){
+        
+        
+        return null;
+        
+        
+    }
+    public Player setPlayer(){
+        
+        
+        return null;
+    }
+    
+    public Platform getPlatform(){
+        
+        
+        return null;        
+    }
+    public Platform addPlatform(){
+        
+        
+        return null;
+    }
+    public Platform removePlatform(){
+        
+        
+        return null;
+    }
+    
+    public Background addBackground(){
+        
+        
+        return null;
+    }
+    public Background removeBackground(){
+        
+        
+        return null;
+    }
 }
