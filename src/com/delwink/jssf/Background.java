@@ -14,12 +14,38 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 package com.delwink.jssf;
 
 /**
- *
- * @author the pc
+ * A background image for a stage.
+ * @author David McMackins II
  */
 public class Background {
+    private final int LAYER;
+    private final String NAME;
     
+    /**
+     * A new background image reference.
+     * @param name The name of the resource for the image.
+     * @param layer The layer of the background.
+     */
+    public Background(String name, int layer) {
+        if (layer < 1)
+            throw new IllegalArgumentException(String.valueOf(layer) + " is not a positive layer");
+        
+        if (name.isEmpty())
+            throw new IllegalArgumentException("Background name cannot be empty");
+        
+        this.LAYER = layer;
+        this.NAME = name;
+    }
+    
+    public int getLayer() {
+        return LAYER;
+    }
+    
+    public String getName() {
+        return NAME;
+    }
 }
