@@ -42,10 +42,10 @@ public class Background {
     }
     
     public int getLayer() {
-        return LAYER;
+        return this.LAYER;
     }
     
     public String getName() {
-        return NAME;
+        return this.NAME;
     }
 }

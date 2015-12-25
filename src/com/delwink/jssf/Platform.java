@@ -42,22 +42,22 @@ public class Platform {
     }
 
     public String getTextureName() {
-        return TEXTURE_NAME;
+        return this.TEXTURE_NAME;
     }
 
     public int getX() {
-        return x;
+        return this.x;
     }
 
     public int getY() {
-        return y;
+        return this.y;
     }
 
     public int getWidth() {
-        return w;
+        return this.w;
     }
 
     public int getHeight() {
-        return h;
+        return this.h;
     }
 }
