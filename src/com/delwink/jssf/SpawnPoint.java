@@ -22,7 +22,7 @@ package com.delwink.jssf;
  * @author David McMackins II
  */
 public class SpawnPoint {
-    final int x, y;
+    private final int x, y;
     
     /**
      * Create a spawn point.
