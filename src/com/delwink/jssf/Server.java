@@ -51,7 +51,7 @@ public interface Server {
      * @throws IllegalStateException if the server's response is malformed.
      * @throws IOException if there is an error making the request.
      */
-    public SsfFile getState() throws IllegalStateException, IOException;
+    public SsfGameState getState() throws IllegalStateException, IOException;
     
     /**
      * Downloads all needed resources from the server into a local cache.

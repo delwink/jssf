@@ -39,10 +39,11 @@ import org.xml.sax.SAXException;
  * A Side Scroller Format file.
  * @authors David McMackins II, Brandon Wadkins
  */
-public class SsfFile {
+public class SsfGameState {
     private final ArrayList<Background> BACKGROUNDS = new ArrayList<>();
     private final ArrayList<Platform> PLATFORMS = new ArrayList<>();
     private final ArrayList<SpawnPoint> SPAWNS = new ArrayList<>();
+    private Player player = null;
     
     /**
      * Opens an SSF file.
@@ -52,7 +53,7 @@ public class SsfFile {
      * @throws ParserConfigurationException if there is an error parsing the XML.
      * @throws SAXException if there is an error parsing the XML.
      */
-    public SsfFile(File file)
+    public SsfGameState(File file)
             throws FileNotFoundException, IOException, ParserConfigurationException, SAXException {
         if (!file.isFile())
             throw new IllegalArgumentException(file.getAbsolutePath() + " is not a regular file");
@@ -77,7 +78,7 @@ public class SsfFile {
      * @throws ParserConfigurationException if there is an error parsing the XML.
      * @throws SAXException if there is an error parsing the XML.
      */
-    public SsfFile(String s)
+    public SsfGameState(String s)
             throws ParserConfigurationException, SAXException, IOException {
         this.loadString(s);
     }
@@ -175,5 +176,13 @@ public class SsfFile {
     
     public void removeSpawnPoint(SpawnPoint spawnPoint) {
         this.SPAWNS.remove(spawnPoint);
+    }
+
+    public Player getPlayer() {
+        return this.player;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
     }
 }
