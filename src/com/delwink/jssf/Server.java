@@ -61,6 +61,13 @@ public interface Server {
     public void downloadResources(ProgressListener pl) throws IOException;
     
     /**
+     * Determines the file path of a resource for this server.
+     * @param name The name of the resource.
+     * @return The absolute path on disk for the resource file.
+     */
+    public String getResourcePath(String name);
+    
+    /**
      * Tries to move the player to the left.
      * @throws IOException if an error occurs while communicating with the server.
      */
