@@ -45,7 +45,7 @@ public class Background {
         return this.LAYER;
     }
     
-    public String getName() {
+    public String getResourceName() {
         return this.NAME;
     }
 }
