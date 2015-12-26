@@ -142,8 +142,8 @@ public class SsfGameState {
         return builder.parse(new InputSource(new StringReader(xml)));
     }
     
-    public Platform[] getPlatforms() {
-        return this.PLATFORMS.toArray(new Platform[this.PLATFORMS.size()]);
+    public ArrayList<Platform> getPlatforms() {
+        return this.PLATFORMS;
     }
     
     public void addPlatform(Platform platform) {
@@ -154,8 +154,8 @@ public class SsfGameState {
         this.PLATFORMS.remove(platform);
     }
     
-    public Background[] getBackgrounds() {
-        return this.BACKGROUNDS.toArray(new Background[this.BACKGROUNDS.size()]);
+    public ArrayList<Background> getBackgrounds() {
+        return this.BACKGROUNDS;
     }
     
     public void addBackground(Background background) {
@@ -166,8 +166,8 @@ public class SsfGameState {
         this.BACKGROUNDS.remove(background);
     }
     
-    public SpawnPoint[] getSpawnPoints() {
-        return this.SPAWNS.toArray(new SpawnPoint[this.SPAWNS.size()]);
+    public ArrayList<SpawnPoint> getSpawnPoints() {
+        return this.SPAWNS;
     }
     
     public void addSpawnPoint(SpawnPoint spawnPoint) {
