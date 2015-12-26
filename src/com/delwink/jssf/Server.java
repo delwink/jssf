@@ -17,6 +17,7 @@
 
 package com.delwink.jssf;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.ConnectException;
 import java.net.UnknownHostException;
@@ -61,11 +62,11 @@ public interface Server {
     public void downloadResources(ProgressListener pl) throws IOException;
     
     /**
-     * Determines the file path of a resource for this server.
+     * Determines the file for a resource for this server.
      * @param name The name of the resource.
-     * @return The absolute path on disk for the resource file.
+     * @return The file referenced by this resource name.
      */
-    public String getResourcePath(String name);
+    public File getResourceFile(String name);
     
     /**
      * Tries to move the player to the left.
