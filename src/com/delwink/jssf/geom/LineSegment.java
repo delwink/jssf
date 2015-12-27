@@ -47,22 +47,25 @@ public class LineSegment {
     }
     
     public Point getIntersection(LineSegment other) {
-        LineSegment diff = new LineSegment(
-                new Point(this.end.getX() - this.start.getX(), this.end.getY() - this.start.getY()),
-                new Point(other.end.getX() - other.start.getX(), other.end.getY() - other.start.getY()));
+        LineSegment l1 = this;
+        LineSegment l2 = other;
         
-        float div = -(diff.end.getX() * diff.start.getY()) + (diff.start.getX() * diff.end.getY());
+        float deltaX1 = l1.end.getX() - l1.start.getX();
+        float deltaY1 = l1.end.getY() - l1.start.getY();
+        float deltaX2 = l2.end.getX() - l2.start.getX();
+        float deltaY2 = l2.end.getY() - l2.start.getY();
+        
+        float div = (deltaX1 * deltaY2) - (deltaX2 * deltaY1);
         if (div == 0)
-            return null;
+            return null; // this can happen if the lines are collinear!
         
-        float xDiff = this.start.getX() - other.start.getX();
-        float yDiff = this.start.getY() - other.start.getY();
-        float s = ((-diff.start.getY() * xDiff) + (diff.start.getX() * yDiff)) / div;
-        float t = ((diff.end.getX() * yDiff) - (diff.end.getY() * xDiff)) / div;
+        float xDiff = l1.start.getX() - l2.start.getX();
+        float yDiff = l1.start.getY() - l2.start.getY();
+        float s = ((deltaX1 * yDiff) - (deltaY1 * xDiff)) / div;
+        float t = ((deltaX2 * yDiff) - (deltaY2 * xDiff)) / div;
         
         if (s >= 0 && s <= 1 && t >= 0 && t <= 1)
-            return new Point(this.start.getX() + (t * diff.start.getX()),
-                    this.start.getY() + (t * diff.start.getY()));
+            return new Point(l1.start.getX() + (t * deltaX1), l1.start.getY() + (t * deltaY1));
         
         return null;
     }
