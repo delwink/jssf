@@ -22,6 +22,8 @@ package com.delwink.jssf.geom;
  * @author David McMackins II
  */
 public class LineSegment {
+    public static final double RIGHT_ANGLE = Math.PI / 2;
+    
     private Point start, end;
     
     public LineSegment(Point start, Point end) {
@@ -68,6 +70,13 @@ public class LineSegment {
             return new Point(l1.start.getX() + (t * deltaX1), l1.start.getY() + (t * deltaY1));
         
         return null;
+    }
+    
+    public float getAngle() {
+        float deltaX = this.end.getX() - this.start.getX();
+        float deltaY = this.end.getY() - this.start.getY();
+        
+        return (float) Math.toDegrees(Math.atan2(deltaY, deltaX));
     }
     
     public Point getStart() {
