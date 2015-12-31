@@ -17,81 +17,55 @@
 
 package com.delwink.jssf.geom;
 
+import java.awt.geom.Line2D;
+import java.awt.geom.Point2D;
+
 /**
  * A line with fixed length.
  * @author David McMackins II
  */
-public class LineSegment {
-    public static final double RIGHT_ANGLE = Math.PI / 2;
-    
-    private Point start, end;
-    
-    public LineSegment(Point start, Point end) {
-        this.setPoints(start, end);
+public class LineSegment extends Line2D.Double {
+    public LineSegment(double x1, double y1, double x2, double y2) {
+        super(x1, y1, x2, y2);
     }
     
-    public LineSegment(LineSegment ls) {
-        this.setLineSegment(ls);
+    public LineSegment(Point2D start, Point2D end) {
+        super(start, end);
     }
     
-    public final void setPoints(Point start, Point end) {
-        this.start = start;
-        this.end = end;
+    public void shift(double x, double y) {
+        this.setLine(x + this.getX1(), y + this.getY1(),
+                x + this.getX2(), y + this.getY2());
     }
     
-    public final void setLineSegment(LineSegment ls) {
-        this.setPoints(ls.getStart(), ls.getEnd());
-    }
-    
-    public void shift(float x, float y) {
-        this.start.shift(x, y);
-        this.end.shift(x, y);
-    }
-    
-    public Point getIntersection(LineSegment other) {
+    public Point2D.Double getIntersection(LineSegment other) {
         LineSegment l1 = this;
         LineSegment l2 = other;
         
-        float deltaX1 = l1.end.getX() - l1.start.getX();
-        float deltaY1 = l1.end.getY() - l1.start.getY();
-        float deltaX2 = l2.end.getX() - l2.start.getX();
-        float deltaY2 = l2.end.getY() - l2.start.getY();
+        double deltaX1 = l1.getX2() - l1.getX1();
+        double deltaY1 = l1.getY2() - l1.getY1();
+        double deltaX2 = l2.getX2() - l2.getX1();
+        double deltaY2 = l2.getY2() - l2.getY1();
         
-        float div = (deltaX1 * deltaY2) - (deltaX2 * deltaY1);
+        double div = (deltaX1 * deltaY2) - (deltaX2 * deltaY1);
         if (div == 0)
             return null; // this can happen if the lines are collinear!
         
-        float xDiff = l1.start.getX() - l2.start.getX();
-        float yDiff = l1.start.getY() - l2.start.getY();
-        float s = ((deltaX1 * yDiff) - (deltaY1 * xDiff)) / div;
-        float t = ((deltaX2 * yDiff) - (deltaY2 * xDiff)) / div;
+        double xDiff = l1.getX1() - l2.getX1();
+        double yDiff = l1.getY1() - l2.getY1();
+        double s = ((deltaX1 * yDiff) - (deltaY1 * xDiff)) / div;
+        double t = ((deltaX2 * yDiff) - (deltaY2 * xDiff)) / div;
         
         if (s >= 0 && s <= 1 && t >= 0 && t <= 1)
-            return new Point(l1.start.getX() + (t * deltaX1), l1.start.getY() + (t * deltaY1));
+            return new Point2D.Double(l1.getX1() + (t * deltaX1), l1.getY1() + (t * deltaY1));
         
         return null;
     }
     
-    public float getAngle() {
-        float deltaX = this.end.getX() - this.start.getX();
-        float deltaY = this.end.getY() - this.start.getY();
+    public double getAngle() {
+        double deltaX = this.getX2() - this.getX1();
+        double deltaY = this.getY2() - this.getY1();
         
-        return (float) Math.toDegrees(Math.atan2(deltaY, deltaX));
-    }
-    
-    public Point getStart() {
-        return new Point(this.start);
-    }
-    
-    public void setStart(Point start) {
-        this.start = start;
-    }
-    
-    public Point getEnd() {
-        return new Point(this.end);
-    }
-    
-    public void setEnd(Point end) {
-        this.end = end;
+        return Math.toDegrees(Math.atan2(deltaY, deltaX));
     }
 }
