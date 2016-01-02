@@ -38,9 +38,8 @@ public class LineSegment extends Line2D.Double {
                 x + this.getX2(), y + this.getY2());
     }
     
-    public Point2D.Double getIntersection(LineSegment other) {
+    public Point2D.Double getIntersection(LineSegment l2) {
         LineSegment l1 = this;
-        LineSegment l2 = other;
         
         double deltaX1 = l1.getX2() - l1.getX1();
         double deltaY1 = l1.getY2() - l1.getY1();
