@@ -17,18 +17,18 @@
 
 package com.delwink.jssf;
 
-import com.delwink.jssf.geom.Point;
+import java.awt.geom.Point2D;
 
 /**
  * The velocty of some object.
  * @author David McMackins II
  */
-public class Velocity extends Point {
+public class Velocity extends Point2D.Double {
     public Velocity() {
         super(0, 0);
     }
     
     public void changeVelocity(float x, float y) {
-        super.shift(x, y);
+        this.setLocation(x + this.getX(), y + this.getY());
     }
 }

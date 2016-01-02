@@ -17,7 +17,7 @@
 
 package com.delwink.jssf;
 
-import com.delwink.jssf.geom.Point;
+import java.awt.geom.Point2D;
 
 /**
  * An object that obeys physics.
@@ -25,14 +25,14 @@ import com.delwink.jssf.geom.Point;
  */
 public abstract class AbstractPhysicalObject {
     private Acceleration acceleration;
-    private Point pos, size;
+    private Point2D.Double pos, size;
     private Velocity velocity;
     
-    public AbstractPhysicalObject(Point pos, Point size) {
+    public AbstractPhysicalObject(Point2D.Double pos, Point2D.Double size) {
         this(pos, size, new Velocity());
     }
     
-    public AbstractPhysicalObject(Point pos, Point size, Velocity velocity) {
+    public AbstractPhysicalObject(Point2D.Double pos, Point2D.Double size, Velocity velocity) {
         this.pos = pos;
         this.size = size;
         this.velocity = velocity;
@@ -43,19 +43,19 @@ public abstract class AbstractPhysicalObject {
         this.velocity.changeVelocity(x, y);
     }
     
-    public Point getPos() {
-        return new Point(this.pos);
+    public Point2D.Double getPos() {
+        return new Point2D.Double(this.pos.getX(), this.pos.getY());
     }
     
-    public void setPos(Point pos) {
+    public void setPos(Point2D.Double pos) {
         this.pos = pos;
     }
     
-    public Point getSize() {
-        return new Point(this.size);
+    public Point2D.Double getSize() {
+        return new Point2D.Double(this.size.getX(), this.size.getY());
     }
     
-    public void setSize(Point size) {
+    public void setSize(Point2D.Double size) {
         this.size = size;
     }
 }
