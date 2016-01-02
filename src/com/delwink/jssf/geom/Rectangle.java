@@ -17,48 +17,60 @@
 
 package com.delwink.jssf.geom;
 
-public class Rectangle {
-    private Point pos, size;
-    
-    public Rectangle(Point pos, Point size) {
-        this.setRectangle(pos, size);
+import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
+
+public class Rectangle extends Rectangle2D.Double {
+    public Rectangle(double x, double y, double w, double h) {
+        super(x, y, w, h);
     }
     
-    public Rectangle(Rectangle r) {
-        this.setRectangle(r);
+    public Rectangle(Point2D pos, Point2D size) {
+        super(pos.getX(), pos.getY(), size.getX(), size.getY());
     }
     
-    public final void setRectangle(Point pos, Point size) {
-        this.pos = pos;
-        this.size = size;
+    public ArrayList<Point2D.Double> getIntersection(LineSegment ls) {
+        ArrayList<Point2D.Double> intersected = new ArrayList<>();
+        LineSegment[] lines = this.getLines();
+        
+        for (LineSegment line : lines) {
+            Point2D.Double p = line.getIntersection(ls);
+            if (p != null && !intersected.contains(p))
+                intersected.add(p);
+        }
+        
+        if (intersected.isEmpty())
+            return null;
+        
+        return intersected;
     }
     
-    public final void setRectangle(Rectangle r) {
-        this.pos = r.getPos();
-        this.size = r.getSize();
+    public ArrayList<Point2D.Double> getIntersection(Rectangle r2) {
+        ArrayList<Point2D.Double> intersected = new ArrayList<>();
+        LineSegment[] l1s = this.getLines(), l2s = r2.getLines();
+        
+        for (LineSegment l1 : l1s)
+            for (LineSegment l2 : l2s) {
+                Point2D.Double p = l1.getIntersection(l2);
+                if (p != null && !intersected.contains(p))
+                    intersected.add(p);
+            }
+        
+        return intersected;
     }
     
-    public void shift(float x, float y) {
-        this.pos.shift(x, y);
-    }
-    
-    public void grow(float x, float y) {
-        this.size.shift(x, y);
-    }
-    
-    public Point getPos() {
-        return new Point(this.pos);
-    }
-    
-    public void setPos(Point pos) {
-        this.pos = pos;
-    }
-    
-    public Point getSize() {
-        return new Point(this.size);
-    }
-    
-    public void setSize(Point size) {
-        this.size = size;
+    public LineSegment[] getLines() {
+        Point2D.Double endPoint = new Point2D.Double(this.getX() + this.getWidth(),
+                this.getY() + this.getHeight());
+        
+        LineSegment lines[] = {
+            new LineSegment(this.getX(), this.getY(), endPoint.getX(), this.getY()),
+            new LineSegment(this.getX(), this.getY(), this.getX(), endPoint.getY()),
+            new LineSegment(this.getX(), endPoint.getY(), endPoint.getX(), endPoint.getY()),
+            new LineSegment(endPoint.getX(), this.getY(), endPoint.getX(), endPoint.getY())
+        };
+        
+        return lines;
     }
 }
